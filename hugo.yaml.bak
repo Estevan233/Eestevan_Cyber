@@ -1,0 +1,33 @@
+baseURL: "https://blog.estevancyber.net/"
+languageCode: "zh-cn"
+title: "Estevan Cyber"
+theme: "PaperMod"
+
+params:
+  env: production
+  defaultTheme: auto
+  ShowReadingTime: true
+  ShowShareButtons: false
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowToc: true
+
+  homeInfoParams:
+    Title: "Estevan Cyber"
+    Content: "记录 AI Agent、VPS、网络工具、开发部署与技术学习。"
+
+menu:
+  main:
+    - identifier: posts
+      name: 文章
+      url: /posts/
+      weight: 10
+    - identifier: tools
+      name: 工具
+      url: https://tools.estevancyber.net/
+      weight: 20
+    - identifier: about
+      name: 关于
+      url: /about/
+      weight: 30

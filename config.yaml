@@ -1,0 +1,37 @@
+baseURL: "https://blog.estevancyber.net/"
+languageCode: "zh-cn"
+title: "Estevan Cyber"
+theme: "PaperMod"
+
+params:
+  env: production
+  defaultTheme: auto
+  ShowReadingTime: true
+  ShowShareButtons: false
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowToc: true
+
+  homeInfoParams:
+    Title: "Estevan Cyber"
+    Content: "输入是为了更好的输出！记录 AI Agent 开发部署与技术学习。也会分享些读书笔记和对生活的感悟..."
+
+menu:
+  main:
+    - identifier: posts
+      name: 文章
+      url: /posts/
+      weight: 10
+    - identifier: projects
+      name: 项目
+      url: /projects/
+      weight: 20
+    - identifier: tools
+      name: 工具
+      url: https://tools.estevancyber.net/
+      weight: 30
+    - identifier: about
+      name: 关于
+      url: /about/
+      weight: 40
