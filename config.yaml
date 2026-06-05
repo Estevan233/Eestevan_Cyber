@@ -15,7 +15,7 @@ params:
 
   homeInfoParams:
     Title: "Estevan Cyber"
-    Content: "记录 AI Agent 开发部署与技术学习，也会分享些读书笔记和对生活的感悟…。"
+    Content: "记录 AI Agent 开发部署与技术学习，也会分享些读书笔记和对生活的感悟…"
 
 menu:
   main:
