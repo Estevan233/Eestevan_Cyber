@@ -40,7 +40,7 @@
 
 **Authentication** ：设置 `root` 密码。
 
-![authorization](static/images/vps-deployment/authorization.png)
+![authorization](/images/vps-deployment/authorization.png)
 
 **点击 Create** ，等待获取公网 IP。
 
@@ -188,7 +188,7 @@ tracert 你的VPS公网IP
 虽然旧金山从地理位置上看更近，但实际测试中纽约节点更稳定，因此最终保留了 NYC3。
 
 这个过程也让我意识到：**VPS 选区不能只看地图距离，实际延迟、丢包和路由才更重要。**
-<img width="1035" height="553" alt="image" src="/images/vps-deployment/net_speed.png" />
+![net-speed](/images/vps-deployment/net-speed.png)
 
 ---
 
@@ -368,10 +368,7 @@ Full (strict)
 Cloudflare → VPS Nginx：HTTPS
 Nginx → 静态网站目录
 ```
-<img width="1344" height="96" alt="image" src="/images/vps-deployment/Cloudflare-dashboard.png" />
-
----
-<img width="444" height="776" alt="image" src="https://github.com/user-attachments/assets/83d197c6-6ce6-44cd-b198-106a6874d413" />
+![Cloudflare-dashboard](/images/vps-deployment/Cloudflare-dashboard.png)
 
 ## 十、部署 Hugo + PaperMod 博客
 
