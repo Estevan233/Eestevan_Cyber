@@ -391,75 +391,10 @@ sudo cp -r public/* /var/www/blog/
 
 ---
 
-## 十一、插入图片
-
-Hugo 当然可以插入图片。最简单的方法是把图片放到：
-
-```text
-static/images/
-```
-
-例如：
-
-```text
-static/images/vps-setup/nyc-bench.png
-static/images/vps-setup/cloudflare-dns.png
-static/images/vps-setup/blog-home.png
-```
-
-然后在 Markdown 文章中引用：
-
-```markdown
-![NYC3 VPS 测速结果](/images/vps-setup/nyc-bench.png)
-
-![Cloudflare DNS 配置](/images/vps-setup/cloudflare-dns.png)
-
-![博客首页效果](/images/vps-setup/blog-home.png)
-```
-
-如果要设置封面图，可以在文章 front matter 中加入：
-
-```yaml
-cover:
-  image: "/images/vps-setup/cover.png"
-  alt: "VPS 配置记录"
-  caption: "DigitalOcean + Cloudflare + Hugo"
-```
-
----
-
-## 十二、AI Agent 与后续服务
-
-除了博客，我还在 VPS 上部署了 Hermes-agent，并接入微信，让它成为一个可以随时对话的私人 AI Agent。
-
-这部分我后续会单独写一篇文章记录，包括：
-
-- Docker 部署 Hermes-agent
-- 配置模型
-- 接入微信
-- 排查权限和 gateway 问题
-- 日常维护命令
-
----
-
-## 十三、后续计划
-
-这台 VPS 后续还会继续承担一些轻量服务：
-
-- 技术博客
-- 工具页面
-- Hermes-agent 微信 AI Agent
-- 个人 API 服务
-- AI Agent 项目 Demo
-- “今天吃什么”Agent 小程序后端
-- Docker Compose 服务编排
-- 自动备份与监控
-
----
 
 ## 总结
 
-这次配置让我真正理解了 VPS、SSH、DNS、Nginx、Cloudflare、Docker 和静态博客之间的关系。
+这次配置让我真正理解了 VPS、SSH、DNS、Nginx、Cloudflare、Docker 和博客之间的关系。
 
 对普通用户来说，最重要的不是一开始就追求复杂架构，而是先做到：
 
