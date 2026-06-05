@@ -182,7 +182,7 @@ tracert 你的VPS公网IP
 虽然旧金山从地理位置上看更近，但实际测试中纽约节点更稳定，因此最终保留了 NYC3。
 
 这个过程也让我意识到：**VPS 选区不能只看地图距离，实际延迟、丢包和路由才更重要。**
-<img width="1035" height="553" alt="image" src="/images/vps-deployment/bench-nyc3.png" />
+<img width="1035" height="553" alt="image" src="/images/vps-deployment/net_speed.png" />
 
 ---
 
