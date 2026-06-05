@@ -1,12 +1,5 @@
 ---
-title: "我的第一台海外 VPS：从服务器测速到个人博客部署"
-date: 2026-06-05
-draft: false
-tags: ["VPS", "DigitalOcean", "Cloudflare", "Hugo", "Linux", "Docker"]
-cover:
-  image: "/images/vps-setup/cover.png"
-  alt: "VPS 配置记录"
-  caption: "DigitalOcean + Cloudflare + Hugo"
+小白从0开始部署海外VPS
 ---
 
 这篇文章记录我第一次从零配置海外 VPS 的完整过程。
