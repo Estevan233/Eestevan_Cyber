@@ -35,7 +35,7 @@
 | Size | 1 vCPU / 2GB RAM 起步 |
 | Authentication | 优先使用 SSH Key |
 | Monitoring | 建议开启 |
-<img width="1187" height="857" alt="image" src="https://github.com/user-attachments/assets/d1f4d7fc-1cb0-4c06-bb17-c4ee109c7ba9" />
+<img width="1187" height="857" alt="image" src="/images/vps-deployment/create-droplet.png" />
 **Authentication** ：设置 `root` 密码。 ![](assets/Digital%20Ocean%20打造高性能专属梯子/file-20260603154445302.png)
 **点击 Create** ，等待获取公网 IP。
 我分别测试了纽约和旧金山两个节点。理论上美国西海岸离亚洲更近，但跨境线路并不只取决于地理距离，还取决于运营商路由、IP 段、晚高峰拥堵等因素。
@@ -182,7 +182,7 @@ tracert 你的VPS公网IP
 虽然旧金山从地理位置上看更近，但实际测试中纽约节点更稳定，因此最终保留了 NYC3。
 
 这个过程也让我意识到：**VPS 选区不能只看地图距离，实际延迟、丢包和路由才更重要。**
-<img width="1035" height="553" alt="image" src="https://github.com/user-attachments/assets/3584d0b1-49d5-4468-899d-28318c102f25" />
+<img width="1035" height="553" alt="image" src="/images/vps-deployment/bench-nyc3.png" />
 
 ---
 
@@ -362,7 +362,7 @@ Full (strict)
 Cloudflare → VPS Nginx：HTTPS
 Nginx → 静态网站目录
 ```
-<img width="1344" height="96" alt="image" src="https://github.com/user-attachments/assets/11f495d9-c3fa-475e-9666-8af3f081ece1" />
+<img width="1344" height="96" alt="image" src="/images/vps-deployment/cloudflare-dns.png" />
 
 ---
 <img width="444" height="776" alt="image" src="https://github.com/user-attachments/assets/83d197c6-6ce6-44cd-b198-106a6874d413" />
