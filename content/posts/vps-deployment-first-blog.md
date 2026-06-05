@@ -35,8 +35,9 @@
 | Size | 1 vCPU / 2GB RAM 起步 |
 | Authentication | 优先使用 SSH Key |
 | Monitoring | 建议开启 |
-<img width="1187" height="857" alt="image" src="/images/vps-deployment/create-droplet.png" />
-**Authentication** ：设置 `root` 密码。 ![](assets/Digital%20Ocean%20打造高性能专属梯子/file-20260603154445302.png)
+![vps-config](/images/vps-deployment/vps-config.png)
+**Authentication** ：设置 `root` 密码。
+![authorization](/images/vps-deployment/authorization.png)
 **点击 Create** ，等待获取公网 IP。
 我分别测试了纽约和旧金山两个节点。理论上美国西海岸离亚洲更近，但跨境线路并不只取决于地理距离，还取决于运营商路由、IP 段、晚高峰拥堵等因素。
 
