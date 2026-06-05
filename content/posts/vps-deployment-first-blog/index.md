@@ -4,6 +4,10 @@ date: 2026-06-05
 draft: false
 tags: ["VPS", "DigitalOcean", "Cloudflare", "Hugo", "Linux", "Docker"]
 summary: "这篇文章记录我第一次从零配置海外 VPS 的完整过程：从服务器选择、SSH 安全加固、Cloudflare 接入，到 Hugo 博客部署。"
+cover:
+  image: "vps-config.png"
+  alt: "VPS 配置截图"
+  caption: "DigitalOcean VPS 配置记录"
 
 ---
 
