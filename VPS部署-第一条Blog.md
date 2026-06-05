@@ -362,8 +362,10 @@ Full (strict)
 Cloudflare → VPS Nginx：HTTPS
 Nginx → 静态网站目录
 ```
+<img width="1344" height="96" alt="image" src="https://github.com/user-attachments/assets/11f495d9-c3fa-475e-9666-8af3f081ece1" />
 
 ---
+<img width="444" height="776" alt="image" src="https://github.com/user-attachments/assets/83d197c6-6ce6-44cd-b198-106a6874d413" />
 
 ## 十、部署 Hugo + PaperMod 博客
 
