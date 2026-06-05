@@ -35,6 +35,7 @@
 | Size | 1 vCPU / 2GB RAM 起步 |
 | Authentication | 优先使用 SSH Key |
 | Monitoring | 建议开启 |
+<img width="1187" height="857" alt="image" src="https://github.com/user-attachments/assets/d1f4d7fc-1cb0-4c06-bb17-c4ee109c7ba9" />
 
 我分别测试了纽约和旧金山两个节点。理论上美国西海岸离亚洲更近，但跨境线路并不只取决于地理距离，还取决于运营商路由、IP 段、晚高峰拥堵等因素。
 
