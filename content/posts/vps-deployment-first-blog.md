@@ -41,6 +41,7 @@
 
 ![authorization](static/images/vps-deployment/authorization.png)
 **点击 Create** ，等待获取公网 IP。
+
 我分别测试了纽约和旧金山两个节点。理论上美国西海岸离亚洲更近，但跨境线路并不只取决于地理距离，还取决于运营商路由、IP 段、晚高峰拥堵等因素。
 
 因此，最终选择哪个区域，最好以自己的实测为准。
