@@ -362,7 +362,7 @@ Full (strict)
 Cloudflare → VPS Nginx：HTTPS
 Nginx → 静态网站目录
 ```
-<img width="1344" height="96" alt="image" src="/images/vps-deployment/Cloudflare dashboard.png" />
+<img width="1344" height="96" alt="image" src="/images/vps-deployment/Cloudflare-dashboard.png" />
 
 ---
 <img width="444" height="776" alt="image" src="https://github.com/user-attachments/assets/83d197c6-6ce6-44cd-b198-106a6874d413" />
