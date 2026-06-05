@@ -36,7 +36,8 @@
 | Authentication | 优先使用 SSH Key |
 | Monitoring | 建议开启 |
 <img width="1187" height="857" alt="image" src="https://github.com/user-attachments/assets/d1f4d7fc-1cb0-4c06-bb17-c4ee109c7ba9" />
-
+**Authentication** ：设置 `root` 密码。 ![](assets/Digital%20Ocean%20打造高性能专属梯子/file-20260603154445302.png)
+**点击 Create** ，等待获取公网 IP。
 我分别测试了纽约和旧金山两个节点。理论上美国西海岸离亚洲更近，但跨境线路并不只取决于地理距离，还取决于运营商路由、IP 段、晚高峰拥堵等因素。
 
 因此，最终选择哪个区域，最好以自己的实测为准。
@@ -70,12 +71,31 @@ ssh leo@你的服务器公网IP
 
 服务器上线后，我做了几项基础安全加固。
 
-### 1. 更新系统
+### 1. 更新系统及BBR加速
 
 ```bash
 sudo apt update
 sudo apt upgrade -y
 ```
+
+**开启BBR加速**
+
+为了解决跨海传输的丢包和延迟问题，必须开启 Linux 内核的 **BBR 拥塞控制算法** 。
+
+在终端依次执行以下 3 行命令：
+
+```bash
+echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
+echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
+sysctl -p
+```
+
+**验证** ：输入 `lsmod | grep bbr` ，如果看到 `tcp_bbr` 字样即为成功。
+
+**效果** ：实测 YouTube 4K 速度可从 4Mbps 提升至 40Mbps+。
+
+>  **注意** ：这一步一定要做，对速度提升明显！
+
 
 ### 2. 开启 UFW 防火墙
 
@@ -162,6 +182,7 @@ tracert 你的VPS公网IP
 虽然旧金山从地理位置上看更近，但实际测试中纽约节点更稳定，因此最终保留了 NYC3。
 
 这个过程也让我意识到：**VPS 选区不能只看地图距离，实际延迟、丢包和路由才更重要。**
+<img width="1035" height="553" alt="image" src="https://github.com/user-attachments/assets/3584d0b1-49d5-4468-899d-28318c102f25" />
 
 ---
 
