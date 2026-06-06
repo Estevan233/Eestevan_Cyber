@@ -3,6 +3,12 @@ languageCode: "zh-cn"
 title: "Estevan Cyber"
 theme: "PaperMod"
 
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
 params:
   env: production
   defaultTheme: auto
@@ -12,23 +18,21 @@ params:
   ShowBreadCrumbs: true
   ShowCodeCopyButtons: true
   ShowToc: true
-  
+
   homeInfoParams:
     Title: "Estevan Cyber"
     Content: "记录 AI Agent 开发部署与技术学习，也会分享些读书笔记和对生活的感悟…"
-  home: ["HTML", "RSS", "JSON"]  # 注意这里一定要加上 "JSON"
-  
-menu:
 
+menu:
   main:
     - identifier: posts
       name: 文章
       url: /posts/
       weight: 10
-    - identifier: "search"
+    - identifier: search
       name: 搜索
-      url: /search/ 
-      weight: 20 
+      url: /search/
+      weight: 20
     - identifier: projects
       name: 项目
       url: /projects/
