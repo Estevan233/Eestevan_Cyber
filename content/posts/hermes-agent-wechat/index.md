@@ -9,6 +9,7 @@ cover:
   alt: "Hermes 配置"
   caption: "Hermes-agent "
 ---
+![Hermes](hermes.png)
 
 这篇文章记录我在 VPS 上部署 Hermes-agent，并把它接入微信的过程。
 
@@ -165,7 +166,7 @@ User ID: ...
 
 还可以选择是否把当前微信用户设置为 home channel：
 
-![Home Channel](weixin-home-channel.png)
+![Home Channel](weixin.png)
 
 我选择将自己的 Weixin user ID 设置为 home channel。这样 Hermes 就知道默认消息应该发到哪里。
 
