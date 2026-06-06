@@ -1,118 +1,58 @@
-/* ===== Estevan Cyber: Dual-Theme Cyber Homepage ===== */
+/* ===== Estevan Cyber Homepage v2: light / dark adaptive ===== */
 
-/* ========================================== */
-/* 1. 主题变量定义（支持白天 / 黑夜无缝切换）  */
-/* ========================================== */
-
-/* 默认：白天浅色模式 */
+/* 默认：浅色模式 */
 :root {
-  --ec-bg: #f8fafc; /* 干净清爽的冷白底色 */
-  --ec-bg-gradient: 
-    radial-gradient(circle at 50% -10%, rgba(99, 102, 241, 0.05), transparent 45%),
-    radial-gradient(circle at 12% 40%, rgba(168, 85, 247, 0.03), transparent 35%),
-    radial-gradient(circle at 88% 65%, rgba(34, 211, 238, 0.03), transparent 35%);
-  --ec-grid-color: rgba(15, 23, 42, 0.025); /* 浅色网格 */
-  --ec-text-primary: #0f172a; /* 深色文字，保证极佳的可读性 */
-  --ec-text-muted: #475569; /* 次要文字（灰色） */
-  
-  /* 标题渐变：深邃的蓝紫渐变，白天依然清晰 */
-  --ec-text-title: linear-gradient(135deg, #0f172a 20%, #4338ca 60%, #6d28d9 100%);
-  --ec-title-shadow: rgba(99, 102, 241, 0.08);
-  --ec-border: rgba(15, 23, 42, 0.06);
-  
-  /* 顶部小标签 */
-  --ec-badge-bg: rgba(99, 102, 241, 0.05);
-  --ec-badge-border: rgba(99, 102, 241, 0.15);
-  --ec-badge-text: #4f46e5;
-  
-  /* 普通按钮 */
-  --ec-btn-bg: rgba(255, 255, 255, 0.8);
-  --ec-btn-border: rgba(15, 23, 42, 0.08);
-  --ec-btn-text: #334155;
-  --ec-btn-hover-bg: #ffffff;
-  --ec-btn-hover-border: rgba(99, 102, 241, 0.4);
-  --ec-btn-hover-text: #0f172a;
-  --ec-btn-shadow: 0 4px 12px -2px rgba(15, 23, 42, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.6);
-  --ec-btn-hover-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.12);
-  
-  /* 第一个重点按钮 */
-  --ec-btn-pri-bg: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(168, 85, 247, 0.08));
-  --ec-btn-pri-border: rgba(99, 102, 241, 0.25);
-  --ec-btn-pri-text: #4f46e5;
-  --ec-btn-pri-hover-bg: linear-gradient(135deg, rgba(99, 102, 241, 0.14), rgba(168, 85, 247, 0.14));
-  --ec-btn-pri-hover-border: rgba(99, 102, 241, 0.5);
-  
-  /* 底部状态栏 */
-  --ec-status-bg: rgba(15, 23, 42, 0.03);
-  --ec-status-border: rgba(15, 23, 42, 0.05);
-  --ec-status-shadow: 0 4px 12px rgba(15, 23, 42, 0.02);
-  
-  /* Logo与菜单 */
-  --ec-logo-gradient: linear-gradient(135deg, #0f172a, #475569);
+  --ec-bg-1: #f8fbff;
+  --ec-bg-2: #eef4ff;
+  --ec-grid: rgba(59, 130, 246, 0.09);
+  --ec-text: #172033;
+  --ec-muted: #526179;
+  --ec-soft: rgba(37, 99, 235, 0.09);
+  --ec-soft-2: rgba(124, 58, 237, 0.08);
+  --ec-border: rgba(37, 99, 235, 0.18);
+  --ec-button-bg: rgba(255, 255, 255, 0.72);
+  --ec-button-hover: rgba(219, 234, 254, 0.92);
+  --ec-button-text: #1e293b;
+  --ec-primary-1: #2563eb;
+  --ec-primary-2: #7c3aed;
+  --ec-chip-bg: rgba(219, 234, 254, 0.72);
+  --ec-chip-text: #2563eb;
+  --ec-status-bg: rgba(255, 255, 255, 0.74);
+  --ec-status-text: #526179;
 }
 
-/* 激活黑夜模式（当 body 含有 .dark 类名时自动切换变量） */
-body.dark {
-  --ec-bg: #090b11; /* 赛博深色底色 */
-  --ec-bg-gradient: 
-    radial-gradient(circle at 50% -10%, rgba(99, 102, 241, 0.15), transparent 45%),
-    radial-gradient(circle at 12% 40%, rgba(168, 85, 247, 0.06), transparent 35%),
-    radial-gradient(circle at 88% 65%, rgba(34, 211, 238, 0.06), transparent 35%);
-  --ec-grid-color: rgba(255, 255, 255, 0.022); /* 深色网格 */
-  --ec-text-primary: #f8fafc;
-  --ec-text-muted: #94a3b8;
-  
-  /* 标题渐变：璀璨的白蓝紫渐变 */
-  --ec-text-title: linear-gradient(135deg, #ffffff 30%, #c7d2fe 70%, #a78bfa 100%);
-  --ec-title-shadow: rgba(129, 140, 248, 0.12);
-  --ec-border: rgba(255, 255, 255, 0.08);
-  
-  /* 顶部小标签 */
-  --ec-badge-bg: rgba(129, 140, 248, 0.06);
-  --ec-badge-border: rgba(129, 140, 248, 0.18);
-  --ec-badge-text: #a5b4fc;
-  
-  /* 普通按钮 */
-  --ec-btn-bg: rgba(255, 255, 255, 0.03);
-  --ec-btn-border: rgba(255, 255, 255, 0.08);
-  --ec-btn-text: #e2e8f0;
-  --ec-btn-hover-bg: rgba(255, 255, 255, 0.07);
-  --ec-btn-hover-border: rgba(129, 140, 248, 0.4);
-  --ec-btn-hover-text: #ffffff;
-  --ec-btn-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.05);
-  --ec-btn-hover-shadow: 0 0 20px rgba(129, 140, 248, 0.12);
-  
-  /* 第一个重点按钮 */
-  --ec-btn-pri-bg: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(168, 85, 247, 0.12));
-  --ec-btn-pri-border: rgba(129, 140, 248, 0.25);
-  --ec-btn-pri-text: #c7d2fe;
-  --ec-btn-pri-hover-bg: linear-gradient(135deg, rgba(99, 102, 241, 0.22), rgba(168, 85, 247, 0.22));
-  --ec-btn-pri-hover-border: rgba(129, 140, 248, 0.5);
-  
-  /* 底部状态栏 */
-  --ec-status-bg: rgba(15, 23, 42, 0.4);
-  --ec-status-border: rgba(255, 255, 255, 0.04);
-  --ec-status-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.02);
-  
-  /* Logo与菜单 */
-  --ec-logo-gradient: linear-gradient(135deg, #ffffff, #cbd5e1);
+/* 深色模式 */
+.dark {
+  --ec-bg-1: #0d1117;
+  --ec-bg-2: #111827;
+  --ec-grid: rgba(255, 255, 255, 0.045);
+  --ec-text: #e6edf3;
+  --ec-muted: #aeb8c5;
+  --ec-soft: rgba(37, 99, 235, 0.24);
+  --ec-soft-2: rgba(124, 58, 237, 0.18);
+  --ec-border: rgba(147, 197, 253, 0.22);
+  --ec-button-bg: rgba(255, 255, 255, 0.07);
+  --ec-button-hover: rgba(96, 165, 250, 0.16);
+  --ec-button-text: #e6edf3;
+  --ec-primary-1: #60a5fa;
+  --ec-primary-2: #a78bfa;
+  --ec-chip-bg: rgba(96, 165, 250, 0.08);
+  --ec-chip-text: #93c5fd;
+  --ec-status-bg: rgba(255, 255, 255, 0.055);
+  --ec-status-text: rgba(209, 213, 219, 0.74);
 }
 
-/* ========================================== */
-/* 2. 页面结构与排版样式                      */
-/* ========================================== */
-
-/* 全站背景：平滑过渡颜色切换 */
+/* 页面背景 */
 body {
   min-height: 100vh;
-  background-color: var(--ec-bg) !important;
-  background-image: var(--ec-bg-gradient) !important;
+  background:
+    radial-gradient(circle at 18% 18%, var(--ec-soft), transparent 30%),
+    radial-gradient(circle at 82% 28%, var(--ec-soft-2), transparent 32%),
+    linear-gradient(180deg, var(--ec-bg-1) 0%, var(--ec-bg-2) 100%);
   background-attachment: fixed;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-  transition: background-color 0.3s ease, background-image 0.3s ease;
 }
 
-/* 网页聚光灯网格：过渡平滑 */
+/* 网格背景 */
 body::before {
   content: "";
   position: fixed;
@@ -120,39 +60,34 @@ body::before {
   pointer-events: none;
   z-index: -2;
   background-image:
-    linear-gradient(var(--ec-grid-color) 1px, transparent 1px),
-    linear-gradient(90deg, var(--ec-grid-color) 1px, transparent 1px);
-  background-size: 50px 50px;
-  -webkit-mask-image: radial-gradient(circle at 50% 45%, black 20%, transparent 75%);
-  mask-image: radial-gradient(circle at 50% 45%, black 20%, transparent 75%);
-  transition: background-image 0.3s ease;
+    linear-gradient(var(--ec-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--ec-grid) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: linear-gradient(to bottom, black 0%, transparent 86%);
 }
 
-/* 顶部导航与边界线 */
+/* 顶部导航 */
 .header {
   background: transparent !important;
-  border-bottom: 1px solid var(--ec-border);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+}
+
+.nav {
+  backdrop-filter: blur(10px);
 }
 
 .logo a {
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  background: var(--ec-logo-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent !important;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--ec-text) !important;
 }
 
 #menu a {
-  font-weight: 500;
-  color: var(--ec-text-muted) !important; /* 强制覆盖，确保白天看清 */
-  transition: color 0.2s ease;
+  font-weight: 650;
+  color: var(--ec-muted) !important;
 }
 
 #menu a:hover {
-  color: var(--ec-text-primary) !important;
+  color: var(--ec-primary-1) !important;
 }
 
 /* 首页居中 */
@@ -163,32 +98,18 @@ body::before {
   justify-content: center;
 }
 
+/* Profile 主体 */
 .profile {
-  width: min(920px, 92vw);
+  width: min(960px, 92vw);
   padding: 0 20px;
   border: none !important;
   background: transparent !important;
   box-shadow: none !important;
-  backdrop-filter: none !important;
-}
-
-/* 渐入动效 */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .profile_inner {
-  position: relative;
   text-align: center;
-  padding: 40px 0 64px;
-  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  padding: 36px 0 58px;
 }
 
 /* 顶部小标签 */
@@ -196,128 +117,129 @@ body::before {
   content: "AI Agent · Cloud Lab · Personal Projects";
   display: inline-flex;
   margin-bottom: 24px;
-  padding: 6px 14px;
+  padding: 8px 14px;
   border-radius: 999px;
-  border: 1px solid var(--ec-badge-border);
-  background: var(--ec-badge-bg);
-  color: var(--ec-badge-text);
-  font-size: 0.8rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  transition: all 0.3s ease;
+  border: 1px solid var(--ec-border);
+  background: var(--ec-chip-bg);
+  color: var(--ec-chip-text);
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
 }
 
-/* 标题：优化字距并自动应用白天/黑夜专属渐变 */
+/* 主标题 */
 .profile h1 {
   margin: 0 auto;
-  max-width: 820px;
-  font-size: clamp(2.8rem, 6.5vw, 5.8rem);
-  line-height: 1.1;
-  letter-spacing: -0.035em; /* 保持精美间距，绝不粘连 */
-  font-weight: 800;
-  background: var(--ec-text-title);
+  max-width: 860px;
+  font-size: clamp(3.4rem, 7.2vw, 6.8rem);
+  line-height: 1;
+  letter-spacing: -0.07em;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--ec-text) 14%, var(--ec-primary-1) 56%, var(--ec-primary-2) 92%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  filter: drop-shadow(0 4px 20px var(--ec-title-shadow));
-  transition: background 0.3s ease, filter 0.3s ease;
+}
+
+/* 浅色模式标题增强，避免太淡 */
+:not(.dark) .profile h1 {
+  text-shadow: 0 12px 50px rgba(37, 99, 235, 0.14);
+}
+
+/* 深色模式标题光晕 */
+.dark .profile h1 {
+  text-shadow: 0 0 48px rgba(96, 165, 250, 0.18);
 }
 
 /* 副标题 */
 .profile .profile_inner span {
   display: block;
-  max-width: 600px;
-  margin: 20px auto 0;
-  color: var(--ec-text-muted) !important; /* 强制覆盖副标题字体颜色 */
-  font-size: clamp(0.95rem, 1.4vw, 1.1rem);
-  line-height: 1.7;
-  transition: color 0.3s ease;
+  max-width: 640px;
+  margin: 22px auto 0;
+  color: var(--ec-muted);
+  font-size: clamp(1rem, 1.5vw, 1.16rem);
+  line-height: 1.8;
+  font-weight: 500;
 }
 
-/* 按钮组 */
+/* 按钮区 */
 .buttons {
-  margin-top: 36px;
-  gap: 14px;
+  margin-top: 34px;
+  gap: 12px;
   justify-content: center;
 }
 
-/* 普通按钮 */
 .buttons .button {
-  border-radius: 12px;
-  padding: 10px 22px;
-  font-weight: 500;
-  font-size: 0.95rem;
-  background: var(--ec-btn-bg) !important;
-  border: 1px solid var(--ec-btn-border) !important;
-  box-shadow: var(--ec-btn-shadow) !important;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  color: var(--ec-btn-text) !important;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 14px;
+  padding: 11px 18px;
+  color: var(--ec-button-text) !important;
+  background: var(--ec-button-bg);
+  border: 1px solid var(--ec-border);
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.09);
+  transition:
+    transform 0.18s ease,
+    background 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
 }
 
 .buttons .button:hover {
   transform: translateY(-2px);
-  background: var(--ec-btn-hover-bg) !important;
-  border-color: var(--ec-btn-hover-border) !important;
-  color: var(--ec-btn-hover-text) !important;
-  box-shadow: var(--ec-btn-hover-shadow) !important;
+  background: var(--ec-button-hover);
+  border-color: var(--ec-primary-1);
+  box-shadow: 0 18px 46px rgba(37, 99, 235, 0.16);
 }
 
-/* 第一个突出按钮（支持双色温） */
+/* 第一个按钮作为主 CTA */
 .buttons .button:first-child {
-  background: var(--ec-btn-pri-bg) !important;
-  border-color: var(--ec-btn-pri-border) !important;
-  color: var(--ec-btn-pri-text) !important;
+  color: #fff !important;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  border-color: transparent;
 }
 
-.buttons .button:first-child:hover {
-  background: var(--ec-btn-pri-hover-bg) !important;
-  border-color: var(--ec-btn-pri-hover-border) !important;
-  color: var(--ec-btn-hover-text) !important;
-}
-
-/* 底部状态栏 */
+/* 状态条 */
 .profile_inner::after {
   content: "Currently building: AI Agent workflows · VPS notes · Web tools";
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
   width: fit-content;
-  max-width: 90%;
-  margin: 40px auto 0;
-  padding: 8px 18px;
+  max-width: 92%;
+  margin: 30px auto 0;
+  padding: 9px 14px;
   border-radius: 999px;
-  color: var(--ec-text-muted);
+  color: var(--ec-status-text);
   background: var(--ec-status-bg);
-  border: 1px solid var(--ec-status-border);
-  font-size: 0.8rem;
-  letter-spacing: 0.02em;
-  box-shadow: var(--ec-status-shadow);
-  backdrop-filter: blur(8px);
-  transition: all 0.3s ease;
+  border: 1px solid var(--ec-border);
+  font-size: 0.84rem;
+  font-weight: 600;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
 }
 
-/* footer */
+/* Footer */
 .footer {
-  opacity: 0.5;
+  opacity: 0.72;
 }
 
-/* 移动端优化 */
+/* 文章卡片也适配主题 */
+.post-entry {
+  border: 1px solid var(--ec-border);
+  background: var(--ec-button-bg);
+  backdrop-filter: blur(10px);
+}
+
+/* 移动端 */
 @media (max-width: 720px) {
   .main {
     align-items: flex-start;
-    padding-top: 64px;
+    padding-top: 48px;
   }
 
   .profile_inner {
-    padding: 24px 0 40px;
+    padding: 32px 0 48px;
   }
 
   .profile h1 {
-    font-size: clamp(2.4rem, 11vw, 3.8rem);
-    letter-spacing: -0.03em;
+    font-size: clamp(3rem, 15vw, 4.8rem);
+    letter-spacing: -0.055em;
   }
 
   .profile_inner::after {
@@ -329,7 +251,6 @@ body::before {
   }
 
   .buttons .button {
-    padding: 8px 16px;
-    font-size: 0.9rem;
+    padding: 9px 14px;
   }
 }
