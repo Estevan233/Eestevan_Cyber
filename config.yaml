@@ -19,6 +19,7 @@ params:
   home: ["HTML", "RSS", "JSON"]  # 注意这里一定要加上 "JSON"
   
 menu:
+
   main:
     - identifier: posts
       name: 文章
