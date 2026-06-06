@@ -12,11 +12,12 @@ params:
   ShowBreadCrumbs: true
   ShowCodeCopyButtons: true
   ShowToc: true
-
+  
   homeInfoParams:
     Title: "Estevan Cyber"
     Content: "记录 AI Agent 开发部署与技术学习，也会分享些读书笔记和对生活的感悟…"
-
+  home: ["HTML", "RSS", "JSON"]  # 注意这里一定要加上 "JSON"
+  
 menu:
   main:
     - identifier: posts
