@@ -24,15 +24,19 @@ menu:
       name: 文章
       url: /posts/
       weight: 10
+    - identifier: "search"
+      name: 搜索
+      url: /search/ 
+      weight: 20 
     - identifier: projects
       name: 项目
       url: /projects/
-      weight: 20
+      weight: 30
     - identifier: tools
       name: 工具
       url: https://tools.estevancyber.net/
-      weight: 30
+      weight: 40
     - identifier: about
       name: 关于
       url: /about/
-      weight: 40
+      weight: 50
