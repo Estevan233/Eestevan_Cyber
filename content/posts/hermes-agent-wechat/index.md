@@ -166,7 +166,7 @@ User ID: ...
 
 还可以选择是否把当前微信用户设置为 home channel：
 
-![Home Channel](weixin.png)
+![Home Channel](weixin.jpg)
 
 我选择将自己的 Weixin user ID 设置为 home channel。这样 Hermes 就知道默认消息应该发到哪里。
 
