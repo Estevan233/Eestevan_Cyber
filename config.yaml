@@ -8,7 +8,7 @@ outputs:
     - HTML
     - RSS
     - JSON
-    
+
 params:
   env: production
   defaultTheme: auto
@@ -19,10 +19,21 @@ params:
   ShowCodeCopyButtons: true
   ShowToc: true
 
-  homeInfoParams:
+  profileMode:
+    enabled: true
     Title: "Estevan Cyber"
-    Content: "记录 AI Agent 开发部署与技术学习，也会分享些读书笔记和对生活的感悟…"
-
+    subtitle: "记录 AI Agent 开发部署与技术学习，也会分享些读书笔记和对生活的感悟…"
+    buttons:
+      - name: 文章
+        url: /posts/
+      - name: 搜索
+        url: /search/
+      - name: 项目
+        url: /projects/
+      - name: 工具
+        url: https://tools.estevancyber.net/
+      - name: 关于
+        url: /about/
 menu:
   main:
     - identifier: posts
