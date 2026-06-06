@@ -6,8 +6,8 @@ tags: ["AI Agent", "Hermes-agent", "Docker", "WeChat", "VPS"]
 summary: "记录在 DigitalOcean VPS 上用 Docker 部署 Hermes-agent，并接入微信作为私人 AI Agent 的完整过程和踩坑记录。"
 cover:
   image: "hermes.png"
-  alt: "Hermes Weixin 配置完成"
-  caption: "Hermes-agent 接入微信"
+  alt: "Hermes 配置"
+  caption: "Hermes-agent "
 ---
 
 这篇文章记录我在 VPS 上部署 Hermes-agent，并把它接入微信的过程。
@@ -82,7 +82,7 @@ HERMES_UID=$(id -u) HERMES_GID=$(id -g) docker compose up -d
 
 一开始 Docker 会下载和构建镜像，过程可能比较久。
 
-![Hermes Docker 构建过程](docker-build-hermes.png)
+![Hermes Docker](docker-build-hermes.png)
 
 启动后检查容器：
 
