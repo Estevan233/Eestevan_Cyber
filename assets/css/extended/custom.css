@@ -6,7 +6,6 @@
 
 /* 默认：白天浅色模式 */
 :root {
-  /* 自定义颜色 */
   --ec-bg: #f8fafc; /* 干净清爽的冷白底色 */
   --ec-bg-gradient: 
     radial-gradient(circle at 50% -10%, rgba(99, 102, 241, 0.05), transparent 45%),
@@ -16,7 +15,7 @@
   --ec-text-primary: #0f172a; /* 深色文字，保证极佳的可读性 */
   --ec-text-muted: #475569; /* 次要文字（灰色） */
   
-  /* 标题渐变：深邃的蓝紫渐变 */
+  /* 标题渐变：深邃的蓝紫渐变，白天依然清晰 */
   --ec-text-title: linear-gradient(135deg, #0f172a 20%, #4338ca 60%, #6d28d9 100%);
   --ec-title-shadow: rgba(99, 102, 241, 0.08);
   --ec-border: rgba(15, 23, 42, 0.06);
@@ -27,7 +26,7 @@
   --ec-badge-text: #4f46e5;
   
   /* 普通按钮 */
-  --ec-btn-bg: rgba(255, 255, 255, 0.85);
+  --ec-btn-bg: rgba(255, 255, 255, 0.8);
   --ec-btn-border: rgba(15, 23, 42, 0.08);
   --ec-btn-text: #334155;
   --ec-btn-hover-bg: #ffffff;
@@ -50,20 +49,10 @@
   
   /* Logo与菜单 */
   --ec-logo-gradient: linear-gradient(135deg, #0f172a, #475569);
-
-  /* ========================================== */
-  /* 重要：直接重写 PaperMod 底层变量，保障全局兼容 */
-  /* ========================================== */
-  --theme: var(--ec-bg) !important;
-  --primary: var(--ec-text-primary) !important;
-  --secondary: var(--ec-text-muted) !important;
-  --tertiary: var(--ec-border) !important;
-  --content: var(--ec-text-primary) !important;
 }
 
-/* 黑夜模式：使用通用 .dark 选择器，完美兼容 html/body 各种挂载方式 */
-.dark {
-  /* 自定义颜色 */
+/* 激活黑夜模式（当 body 含有 .dark 类名时自动切换变量） */
+body.dark {
   --ec-bg: #090b11; /* 赛博深色底色 */
   --ec-bg-gradient: 
     radial-gradient(circle at 50% -10%, rgba(99, 102, 241, 0.15), transparent 45%),
@@ -107,29 +96,20 @@
   
   /* Logo与菜单 */
   --ec-logo-gradient: linear-gradient(135deg, #ffffff, #cbd5e1);
-
-  /* ========================================== */
-  /* 重要：直接重写 PaperMod 底层变量，保障全局兼容 */
-  /* ========================================== */
-  --theme: var(--ec-bg) !important;
-  --primary: var(--ec-text-primary) !important;
-  --secondary: var(--ec-text-muted) !important;
-  --tertiary: var(--ec-border) !important;
-  --content: var(--ec-text-primary) !important;
 }
 
 /* ========================================== */
 /* 2. 页面结构与排版样式                      */
 /* ========================================== */
 
-/* 全站背景：强制应用对应模式的背景色和渐变，过渡平滑 */
+/* 全站背景：平滑过渡颜色切换 */
 body {
   min-height: 100vh;
   background-color: var(--ec-bg) !important;
   background-image: var(--ec-bg-gradient) !important;
   background-attachment: fixed;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-  transition: background-color 0.3s ease, background-image 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s ease, background-image 0.3s ease;
 }
 
 /* 网页聚光灯网格：过渡平滑 */
@@ -151,7 +131,7 @@ body::before {
 /* 顶部导航与边界线 */
 .header {
   background: transparent !important;
-  border-bottom: 1px solid var(--ec-border) !important;
+  border-bottom: 1px solid var(--ec-border);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
@@ -159,9 +139,9 @@ body::before {
 .logo a {
   font-weight: 700;
   letter-spacing: -0.03em;
-  background: var(--ec-logo-gradient) !important;
-  -webkit-background-clip: text !important;
-  background-clip: text !important;
+  background: var(--ec-logo-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
   color: transparent !important;
 }
 
@@ -173,12 +153,6 @@ body::before {
 
 #menu a:hover {
   color: var(--ec-text-primary) !important;
-}
-
-/* 修复主题切换按钮在浅色模式下的可见度 */
-#theme-toggle {
-  color: var(--ec-text-primary) !important;
-  transition: color 0.2s ease;
 }
 
 /* 首页居中 */
@@ -224,9 +198,9 @@ body::before {
   margin-bottom: 24px;
   padding: 6px 14px;
   border-radius: 999px;
-  border: 1px solid var(--ec-badge-border) !important;
-  background: var(--ec-badge-bg) !important;
-  color: var(--ec-badge-text) !important;
+  border: 1px solid var(--ec-badge-border);
+  background: var(--ec-badge-bg);
+  color: var(--ec-badge-text);
   font-size: 0.8rem;
   font-weight: 500;
   letter-spacing: 0.04em;
@@ -242,11 +216,11 @@ body::before {
   line-height: 1.1;
   letter-spacing: -0.035em; /* 保持精美间距，绝不粘连 */
   font-weight: 800;
-  background: var(--ec-text-title) !important;
-  -webkit-background-clip: text !important;
-  background-clip: text !important;
-  color: transparent !important;
-  filter: drop-shadow(0 4px 20px var(--ec-title-shadow)) !important;
+  background: var(--ec-text-title);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 4px 20px var(--ec-title-shadow));
   transition: background 0.3s ease, filter 0.3s ease;
 }
 
@@ -315,12 +289,12 @@ body::before {
   margin: 40px auto 0;
   padding: 8px 18px;
   border-radius: 999px;
-  color: var(--ec-text-muted) !important;
-  background: var(--ec-status-bg) !important;
-  border: 1px solid var(--ec-status-border) !important;
+  color: var(--ec-text-muted);
+  background: var(--ec-status-bg);
+  border: 1px solid var(--ec-status-border);
   font-size: 0.8rem;
   letter-spacing: 0.02em;
-  box-shadow: var(--ec-status-shadow) !important;
+  box-shadow: var(--ec-status-shadow);
   backdrop-filter: blur(8px);
   transition: all 0.3s ease;
 }
@@ -328,13 +302,6 @@ body::before {
 /* footer */
 .footer {
   opacity: 0.5;
-}
-
-/* 文章卡片 */
-.post-entry {
-  border: 1px solid var(--ec-border) !important;
-  background: var(--ec-btn-bg) !important;
-  backdrop-filter: blur(10px);
 }
 
 /* 移动端优化 */
