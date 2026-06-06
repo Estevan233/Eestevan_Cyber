@@ -5,7 +5,7 @@ draft: false
 tags: ["AI Agent", "Hermes-agent", "Docker", "WeChat", "VPS"]
 summary: "记录在 DigitalOcean VPS 上用 Docker 部署 Hermes-agent，并接入微信作为私人 AI Agent 的完整过程和踩坑记录。"
 cover:
-  image: "weixin-configured.png"
+  image: "hermes.png"
   alt: "Hermes Weixin 配置完成"
   caption: "Hermes-agent 接入微信"
 ---
@@ -109,7 +109,7 @@ docker compose exec gateway hermes setup
 
 Hermes 会出现 Setup Wizard。
 
-![Hermes Setup Portal 登录](hermes-setup-portal.png)
+![Hermes Setup Portal](hermes-setup-portal.png)
 
 这里有两种路线：
 
@@ -130,7 +130,7 @@ Hermes 会出现 Setup Wizard。
 Keep current (local)
 ```
 
-![选择 Local Terminal Backend](terminal-backend-local.png)
+![Local Terminal Backend](terminal-backend-local.png)
 
 简单理解：
 
@@ -161,11 +161,11 @@ Account ID: ...
 User ID: ...
 ```
 
-![Weixin 配置完成](weixin-configured.png)
+![Weixin](weixin-configured.png)
 
 还可以选择是否把当前微信用户设置为 home channel：
 
-![设置微信 Home Channel](weixin-home-channel.png)
+![Home Channel](weixin-home-channel.png)
 
 我选择将自己的 Weixin user ID 设置为 home channel。这样 Hermes 就知道默认消息应该发到哪里。
 
