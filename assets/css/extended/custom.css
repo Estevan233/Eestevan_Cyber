@@ -1,28 +1,118 @@
-/* ===== Estevan Cyber: Premium Cyber Homepage ===== */
+/* ===== Estevan Cyber: Dual-Theme Cyber Homepage ===== */
 
+/* ========================================== */
+/* 1. 主题变量定义（支持白天 / 黑夜无缝切换）  */
+/* ========================================== */
+
+/* 默认：白天浅色模式 */
 :root {
-  --ec-bg: #090b11; /* 稍微加深底色，让暗色调更纯粹 */
-  --ec-text: #f8fafc;
-  --ec-muted: #94a3b8;
-  --ec-border: rgba(255, 255, 255, 0.08);
-  --ec-blue: #60a5fa;
-  --ec-purple: #a78bfa;
-  --ec-cyan: #22d3ee;
+  --ec-bg: #f8fafc; /* 干净清爽的冷白底色 */
+  --ec-bg-gradient: 
+    radial-gradient(circle at 50% -10%, rgba(99, 102, 241, 0.05), transparent 45%),
+    radial-gradient(circle at 12% 40%, rgba(168, 85, 247, 0.03), transparent 35%),
+    radial-gradient(circle at 88% 65%, rgba(34, 211, 238, 0.03), transparent 35%);
+  --ec-grid-color: rgba(15, 23, 42, 0.025); /* 浅色网格 */
+  --ec-text-primary: #0f172a; /* 深色文字，保证极佳的可读性 */
+  --ec-text-muted: #475569; /* 次要文字（灰色） */
+  
+  /* 标题渐变：深邃的蓝紫渐变，白天依然清晰 */
+  --ec-text-title: linear-gradient(135deg, #0f172a 20%, #4338ca 60%, #6d28d9 100%);
+  --ec-title-shadow: rgba(99, 102, 241, 0.08);
+  --ec-border: rgba(15, 23, 42, 0.06);
+  
+  /* 顶部小标签 */
+  --ec-badge-bg: rgba(99, 102, 241, 0.05);
+  --ec-badge-border: rgba(99, 102, 241, 0.15);
+  --ec-badge-text: #4f46e5;
+  
+  /* 普通按钮 */
+  --ec-btn-bg: rgba(255, 255, 255, 0.8);
+  --ec-btn-border: rgba(15, 23, 42, 0.08);
+  --ec-btn-text: #334155;
+  --ec-btn-hover-bg: #ffffff;
+  --ec-btn-hover-border: rgba(99, 102, 241, 0.4);
+  --ec-btn-hover-text: #0f172a;
+  --ec-btn-shadow: 0 4px 12px -2px rgba(15, 23, 42, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  --ec-btn-hover-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.12);
+  
+  /* 第一个重点按钮 */
+  --ec-btn-pri-bg: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(168, 85, 247, 0.08));
+  --ec-btn-pri-border: rgba(99, 102, 241, 0.25);
+  --ec-btn-pri-text: #4f46e5;
+  --ec-btn-pri-hover-bg: linear-gradient(135deg, rgba(99, 102, 241, 0.14), rgba(168, 85, 247, 0.14));
+  --ec-btn-pri-hover-border: rgba(99, 102, 241, 0.5);
+  
+  /* 底部状态栏 */
+  --ec-status-bg: rgba(15, 23, 42, 0.03);
+  --ec-status-border: rgba(15, 23, 42, 0.05);
+  --ec-status-shadow: 0 4px 12px rgba(15, 23, 42, 0.02);
+  
+  /* Logo与菜单 */
+  --ec-logo-gradient: linear-gradient(135deg, #0f172a, #475569);
 }
 
-/* 全站背景：优化氛围灯光，使其更自然 */
-body {
-  min-height: 100vh;
-  background-color: var(--ec-bg);
-  background-image:
+/* 激活黑夜模式（当 body 含有 .dark 类名时自动切换变量） */
+body.dark {
+  --ec-bg: #090b11; /* 赛博深色底色 */
+  --ec-bg-gradient: 
     radial-gradient(circle at 50% -10%, rgba(99, 102, 241, 0.15), transparent 45%),
     radial-gradient(circle at 12% 40%, rgba(168, 85, 247, 0.06), transparent 35%),
     radial-gradient(circle at 88% 65%, rgba(34, 211, 238, 0.06), transparent 35%);
-  background-attachment: fixed;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --ec-grid-color: rgba(255, 255, 255, 0.022); /* 深色网格 */
+  --ec-text-primary: #f8fafc;
+  --ec-text-muted: #94a3b8;
+  
+  /* 标题渐变：璀璨的白蓝紫渐变 */
+  --ec-text-title: linear-gradient(135deg, #ffffff 30%, #c7d2fe 70%, #a78bfa 100%);
+  --ec-title-shadow: rgba(129, 140, 248, 0.12);
+  --ec-border: rgba(255, 255, 255, 0.08);
+  
+  /* 顶部小标签 */
+  --ec-badge-bg: rgba(129, 140, 248, 0.06);
+  --ec-badge-border: rgba(129, 140, 248, 0.18);
+  --ec-badge-text: #a5b4fc;
+  
+  /* 普通按钮 */
+  --ec-btn-bg: rgba(255, 255, 255, 0.03);
+  --ec-btn-border: rgba(255, 255, 255, 0.08);
+  --ec-btn-text: #e2e8f0;
+  --ec-btn-hover-bg: rgba(255, 255, 255, 0.07);
+  --ec-btn-hover-border: rgba(129, 140, 248, 0.4);
+  --ec-btn-hover-text: #ffffff;
+  --ec-btn-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+  --ec-btn-hover-shadow: 0 0 20px rgba(129, 140, 248, 0.12);
+  
+  /* 第一个重点按钮 */
+  --ec-btn-pri-bg: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(168, 85, 247, 0.12));
+  --ec-btn-pri-border: rgba(129, 140, 248, 0.25);
+  --ec-btn-pri-text: #c7d2fe;
+  --ec-btn-pri-hover-bg: linear-gradient(135deg, rgba(99, 102, 241, 0.22), rgba(168, 85, 247, 0.22));
+  --ec-btn-pri-hover-border: rgba(129, 140, 248, 0.5);
+  
+  /* 底部状态栏 */
+  --ec-status-bg: rgba(15, 23, 42, 0.4);
+  --ec-status-border: rgba(255, 255, 255, 0.04);
+  --ec-status-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.02);
+  
+  /* Logo与菜单 */
+  --ec-logo-gradient: linear-gradient(135deg, #ffffff, #cbd5e1);
 }
 
-/* 网页聚光灯网格：使用径向遮罩，让网格从中心向四周优雅淡出 */
+/* ========================================== */
+/* 2. 页面结构与排版样式                      */
+/* ========================================== */
+
+/* 全站背景：平滑过渡颜色切换 */
+body {
+  min-height: 100vh;
+  background-color: var(--ec-bg) !important;
+  background-image: var(--ec-bg-gradient) !important;
+  background-attachment: fixed;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  transition: background-color 0.3s ease, background-image 0.3s ease;
+}
+
+/* 网页聚光灯网格：过渡平滑 */
 body::before {
   content: "";
   position: fixed;
@@ -30,17 +120,18 @@ body::before {
   pointer-events: none;
   z-index: -2;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+    linear-gradient(var(--ec-grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--ec-grid-color) 1px, transparent 1px);
   background-size: 50px 50px;
   -webkit-mask-image: radial-gradient(circle at 50% 45%, black 20%, transparent 75%);
   mask-image: radial-gradient(circle at 50% 45%, black 20%, transparent 75%);
+  transition: background-image 0.3s ease;
 }
 
-/* 顶部导航：微弱描边与毛玻璃 */
+/* 顶部导航与边界线 */
 .header {
   background: transparent !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid var(--ec-border);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
@@ -48,7 +139,7 @@ body::before {
 .logo a {
   font-weight: 700;
   letter-spacing: -0.03em;
-  background: linear-gradient(135deg, #ffffff, #cbd5e1);
+  background: var(--ec-logo-gradient);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent !important;
@@ -56,12 +147,12 @@ body::before {
 
 #menu a {
   font-weight: 500;
-  color: var(--ec-muted);
+  color: var(--ec-text-muted) !important; /* 强制覆盖，确保白天看清 */
   transition: color 0.2s ease;
 }
 
 #menu a:hover {
-  color: #ffffff;
+  color: var(--ec-text-primary) !important;
 }
 
 /* 首页居中 */
@@ -72,7 +163,6 @@ body::before {
   justify-content: center;
 }
 
-/* 去掉笨重卡片 */
 .profile {
   width: min(920px, 92vw);
   padding: 0 20px;
@@ -82,7 +172,7 @@ body::before {
   backdrop-filter: none !important;
 }
 
-/* 优雅渐入动画 */
+/* 渐入动效 */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -94,7 +184,6 @@ body::before {
   }
 }
 
-/* Hero 内容 */
 .profile_inner {
   position: relative;
   text-align: center;
@@ -109,28 +198,30 @@ body::before {
   margin-bottom: 24px;
   padding: 6px 14px;
   border-radius: 999px;
-  border: 1px solid rgba(129, 140, 248, 0.18);
-  background: rgba(129, 140, 248, 0.06);
-  color: #a5b4fc;
+  border: 1px solid var(--ec-badge-border);
+  background: var(--ec-badge-bg);
+  color: var(--ec-badge-text);
   font-size: 0.8rem;
   font-weight: 500;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  transition: all 0.3s ease;
 }
 
-/* 标题：优化字距与渐变层次，避免粘连 */
+/* 标题：优化字距并自动应用白天/黑夜专属渐变 */
 .profile h1 {
   margin: 0 auto;
   max-width: 820px;
   font-size: clamp(2.8rem, 6.5vw, 5.8rem);
   line-height: 1.1;
-  letter-spacing: -0.035em; /* 修复粘连问题，保留紧凑的高级感 */
+  letter-spacing: -0.035em; /* 保持精美间距，绝不粘连 */
   font-weight: 800;
-  background: linear-gradient(135deg, #ffffff 30%, #c7d2fe 70%, #a78bfa 100%);
+  background: var(--ec-text-title);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  filter: drop-shadow(0 4px 20px rgba(129, 140, 248, 0.12));
+  filter: drop-shadow(0 4px 20px var(--ec-title-shadow));
+  transition: background 0.3s ease, filter 0.3s ease;
 }
 
 /* 副标题 */
@@ -138,9 +229,10 @@ body::before {
   display: block;
   max-width: 600px;
   margin: 20px auto 0;
-  color: var(--ec-muted);
+  color: var(--ec-text-muted) !important; /* 强制覆盖副标题字体颜色 */
   font-size: clamp(0.95rem, 1.4vw, 1.1rem);
   line-height: 1.7;
+  transition: color 0.3s ease;
 }
 
 /* 按钮组 */
@@ -150,51 +242,43 @@ body::before {
   justify-content: center;
 }
 
-/* 按钮：磨砂玻璃态与微光动效 */
+/* 普通按钮 */
 .buttons .button {
   border-radius: 12px;
   padding: 10px 22px;
   font-weight: 500;
   font-size: 0.95rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 
-    inset 0 1px 1px rgba(255, 255, 255, 0.05),
-    0 10px 20px -10px rgba(0, 0, 0, 0.3);
+  background: var(--ec-btn-bg) !important;
+  border: 1px solid var(--ec-btn-border) !important;
+  box-shadow: var(--ec-btn-shadow) !important;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  color: var(--ec-btn-text) !important;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  color: #e2e8f0;
 }
 
-/* 普通按钮悬停：微光亮起 */
 .buttons .button:hover {
   transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(129, 140, 248, 0.4);
-  color: #ffffff;
-  box-shadow: 
-    0 0 20px rgba(129, 140, 248, 0.12),
-    inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  background: var(--ec-btn-hover-bg) !important;
+  border-color: var(--ec-btn-hover-border) !important;
+  color: var(--ec-btn-hover-text) !important;
+  box-shadow: var(--ec-btn-hover-shadow) !important;
 }
 
-/* 第一个按钮（重点突出）：使用柔和的渐变微光，不过度刺眼 */
+/* 第一个突出按钮（支持双色温） */
 .buttons .button:first-child {
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(168, 85, 247, 0.12));
-  border-color: rgba(129, 140, 248, 0.25);
-  color: #c7d2fe;
+  background: var(--ec-btn-pri-bg) !important;
+  border-color: var(--ec-btn-pri-border) !important;
+  color: var(--ec-btn-pri-text) !important;
 }
 
 .buttons .button:first-child:hover {
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.22), rgba(168, 85, 247, 0.22));
-  border-color: rgba(129, 140, 248, 0.5);
-  color: #ffffff;
-  box-shadow: 
-    0 0 25px rgba(129, 140, 248, 0.2),
-    inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  background: var(--ec-btn-pri-hover-bg) !important;
+  border-color: var(--ec-btn-pri-hover-border) !important;
+  color: var(--ec-btn-hover-text) !important;
 }
 
-/* 状态条：优化为更精致的太空舱形态 */
+/* 底部状态栏 */
 .profile_inner::after {
   content: "Currently building: AI Agent workflows · VPS notes · Web tools";
   display: inline-flex;
@@ -204,31 +288,23 @@ body::before {
   max-width: 90%;
   margin: 40px auto 0;
   padding: 8px 18px;
-  border-radius: 999px; /* 胶囊圆角 */
-  color: #94a3b8;
-  background: rgba(15, 23, 42, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 999px;
+  color: var(--ec-text-muted);
+  background: var(--ec-status-bg);
+  border: 1px solid var(--ec-status-border);
   font-size: 0.8rem;
   letter-spacing: 0.02em;
-  box-shadow: 
-    0 4px 12px rgba(0, 0, 0, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.02);
+  box-shadow: var(--ec-status-shadow);
   backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
 }
 
-/* footer 低调 */
+/* footer */
 .footer {
   opacity: 0.5;
 }
 
-/* 文章卡片 */
-.post-entry {
-  border: 1px solid rgba(255,255,255,0.06);
-  background: rgba(255,255,255,0.03);
-  backdrop-filter: blur(10px);
-}
-
-/* 移动端响应式优化 */
+/* 移动端优化 */
 @media (max-width: 720px) {
   .main {
     align-items: flex-start;
@@ -245,7 +321,7 @@ body::before {
   }
 
   .profile_inner::after {
-    display: none; /* 移动端隐藏状态栏以保持简洁 */
+    display: none;
   }
 
   .buttons {
