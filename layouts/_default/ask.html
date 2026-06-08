@@ -1,0 +1,35 @@
+{{ define "main" }}
+{{ $agentApiBase := .Params.agentApiBase | default "https://api.estevancyber.net" }}
+{{ $agentEndpoint := printf "%s/api/ask" $agentApiBase }}
+
+<section class="ask-agent" data-agent-endpoint="{{ $agentEndpoint }}" data-dev-endpoint="http://127.0.0.1:8000/api/ask">
+  <div class="ask-agent__shell">
+    <header class="ask-agent__header">
+      <p class="ask-agent__eyebrow">Personal Knowledge Agent</p>
+      <h1>{{ .Title }}</h1>
+      <p>围绕文章、项目、VPS、AI Agent 笔记提问。</p>
+    </header>
+
+    <div class="ask-agent__messages" id="ask-messages" aria-live="polite">
+      <article class="ask-message ask-message--assistant">
+        <div class="ask-message__bubble">
+          <p>可以直接问：Hermes Agent 怎么部署、Cloudflare 为什么 525、Reality 和 WS CDN 有什么区别。</p>
+        </div>
+      </article>
+    </div>
+
+    <form class="ask-agent__form" id="ask-form">
+      <label class="ask-agent__label" for="ask-question">问题</label>
+      <textarea id="ask-question" name="question" rows="3" maxlength="1000" placeholder="问一个和 Estevan Cyber 内容有关的问题"></textarea>
+      <div class="ask-agent__actions">
+        <span id="ask-status" class="ask-agent__status" aria-live="polite"></span>
+        <button type="submit" id="ask-submit">发送</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+{{ $askJS := resources.Get "js/ask-agent.js" | minify | fingerprint }}
+<script defer src="{{ $askJS.RelPermalink }}" integrity="{{ $askJS.Data.Integrity }}"></script>
+{{ end }}
+
