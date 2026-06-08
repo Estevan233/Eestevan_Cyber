@@ -23,6 +23,8 @@ class Settings:
     retriever_limit: int = 4
     max_history_messages: int = 8
     temperature: float = 0.2
+    tavily_api_key: str | None = None
+    local_score_threshold: float = 2.0
 
     @classmethod
     def from_env(cls) -> "Settings":
@@ -42,6 +44,8 @@ class Settings:
             retriever_limit=int(os.getenv("ASK_AGENT_RETRIEVER_LIMIT", "4")),
             max_history_messages=int(os.getenv("ASK_AGENT_MAX_HISTORY_MESSAGES", "8")),
             temperature=float(os.getenv("DEEPSEEK_TEMPERATURE", "0.2")),
+            tavily_api_key=os.getenv("TAVILY_API_KEY") or None,
+            local_score_threshold=float(os.getenv("ASK_AGENT_LOCAL_SCORE_THRESHOLD", "2.0")),
         )
 
     def __repr__(self) -> str:

@@ -21,6 +21,7 @@ class SourceSnippet(BaseModel):
     url: str
     snippet: str
     score: float = Field(ge=0)
+    source_type: str = "local"
 
 
 class AskResponse(BaseModel):

@@ -68,3 +68,48 @@ def test_answer_response_serializes_sources() -> None:
     assert payload["sources"][0]["title"] == "VPS 上部署 Hermes-agent"
     assert payload["sources"][0]["score"] == 0.87
     assert payload["trace_id"] == "trace-1"
+
+
+def test_settings_read_tavily_overrides(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("TAVILY_API_KEY", "tvly-test-key")
+    monkeypatch.setenv("ASK_AGENT_LOCAL_SCORE_THRESHOLD", "3.5")
+
+    settings = Settings.from_env()
+
+    assert settings.tavily_api_key == "tvly-test-key"
+    assert settings.local_score_threshold == 3.5
+
+
+def test_settings_tavily_defaults_to_none(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.delenv("TAVILY_API_KEY", raising=False)
+
+    settings = Settings.from_env()
+
+    assert settings.tavily_api_key is None
+    assert settings.local_score_threshold == 2.0
+
+
+def test_source_snippet_defaults_to_local() -> None:
+    s = SourceSnippet(title="T", url="https://example.com", snippet="test", score=0.5)
+    assert s.source_type == "local"
+
+
+def test_answer_response_serializes_source_type() -> None:
+    response = AskResponse(
+        answer="test",
+        sources=[
+            SourceSnippet(
+                title="A",
+                url="https://a.com",
+                snippet="a",
+                score=0.9,
+                source_type="web",
+            ),
+            SourceSnippet(title="B", url="https://b.com", snippet="b", score=0.5),
+        ],
+        session_id="s1",
+        trace_id="t1",
+    )
+    payload = response.model_dump()
+    assert payload["sources"][0]["source_type"] == "web"
+    assert payload["sources"][1]["source_type"] == "local"
