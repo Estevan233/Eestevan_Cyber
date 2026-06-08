@@ -19,6 +19,7 @@ DEEPSEEK_MODEL=deepseek-chat
 DEEPSEEK_BASE_URL=https://api.deepseek.com
 SITE_BASE_URL=https://blog.estevancyber.net
 ASK_AGENT_CORS_ORIGINS=https://blog.estevancyber.net,https://estevancyber.net
+TAVILY_API_KEY=tvly-your_key_here
 ```
 
 ## Build
