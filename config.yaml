@@ -28,6 +28,8 @@ params:
         url: /posts/
       - name: 搜索
         url: /search/
+      - name: 问答
+        url: /ask/
       - name: 项目
         url: /projects/
       - name: 工具
@@ -44,6 +46,10 @@ menu:
       name: 搜索
       url: /search/
       weight: 20
+    - identifier: ask
+      name: 问答
+      url: /ask/
+      weight: 25
     - identifier: projects
       name: 项目
       url: /projects/
