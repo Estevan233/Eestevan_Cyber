@@ -505,6 +505,18 @@ body::before {
   line-height: 1.6;
 }
 
+.ask-source__badge {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.75rem;
+  color: var(--ec-text-muted);
+  letter-spacing: 0;
+}
+
+.ask-source--web {
+  border-color: rgba(56, 189, 248, 0.25);
+}
+
 .ask-agent__form {
   display: grid;
   gap: 12px;

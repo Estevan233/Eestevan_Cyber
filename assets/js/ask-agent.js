@@ -99,11 +99,16 @@
     list.className = "ask-sources";
 
     sources.slice(0, 4).forEach(function (source) {
+      const isWeb = source.source_type === "web";
       const link = document.createElement("a");
-      link.className = "ask-source";
+      link.className = "ask-source" + (isWeb ? " ask-source--web" : "");
       link.href = source.url;
       link.target = "_blank";
       link.rel = "noopener";
+
+      const badge = document.createElement("span");
+      badge.className = "ask-source__badge";
+      badge.textContent = isWeb ? "🌐 网页" : "📄 笔记";
 
       const title = document.createElement("strong");
       title.textContent = source.title;
@@ -111,6 +116,7 @@
       const snippet = document.createElement("span");
       snippet.textContent = source.snippet;
 
+      link.appendChild(badge);
       link.appendChild(title);
       link.appendChild(snippet);
       list.appendChild(link);
