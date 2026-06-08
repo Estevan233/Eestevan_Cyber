@@ -7,6 +7,7 @@ from typing import Protocol
 
 from app.retrieval import KeywordRetriever, RetrievalResult
 from app.schemas import AskRequest, AskResponse, SourceSnippet
+from app.search import WebSearchClient, WebSearchResult
 
 
 class LLMError(RuntimeError):
@@ -42,25 +43,41 @@ class KnowledgeAgent:
         llm: LLMClient,
         conversations: ConversationStore | None = None,
         retriever_limit: int = 4,
+        web_search: WebSearchClient | None = None,
+        local_score_threshold: float = 2.0,
     ) -> None:
         self.retriever = retriever
         self.llm = llm
         self.conversations = conversations or ConversationStore()
         self.retriever_limit = retriever_limit
+        self.web_search = web_search
+        self.local_score_threshold = local_score_threshold
 
     async def answer(self, request: AskRequest) -> AskResponse:
         session_id = request.session_id or f"session-{uuid.uuid4().hex[:12]}"
         trace_id = uuid.uuid4().hex
         results = self.retriever.search(request.question, limit=self.retriever_limit)
-        sources = [_source_from_result(result) for result in results]
 
-        if not results:
-            answer = "我在当前知识库里没有找到足够相关的内容。换个问法，或者先把相关笔记补进 content 目录。"
+        max_score = max((r.score for r in results), default=0.0)
+        needs_web = self.web_search is not None and max_score < self.local_score_threshold
+
+        web_results: list[WebSearchResult] = []
+        if needs_web:
+            web_results = self.web_search.search(request.question)
+
+        local_sources = [_source_from_result(r) for r in results]
+        web_snippets = [_source_from_result_web(wr) for wr in web_results]
+        all_sources = local_sources + web_snippets
+        all_sources.sort(key=lambda s: s.score, reverse=True)
+        all_sources = all_sources[:6]
+
+        if not results and not web_results:
+            answer = "在当前知识库和联网搜索结果中都没有找到足够相关的内容。换个问法试试。"
             self.conversations.add_turn(session_id, question=request.question, answer=answer)
             return AskResponse(answer=answer, sources=[], session_id=session_id, trace_id=trace_id)
 
         history = self.conversations.get(session_id)
-        context = _format_context(results)
+        context = _format_context(results, web_results)
         try:
             answer = self.llm.generate(question=request.question, context=context, history=history)
         except LLMError:
@@ -70,7 +87,7 @@ class KnowledgeAgent:
 
         answer = answer.strip() or "模型没有返回有效内容。你可以换个问题再试。"
         self.conversations.add_turn(session_id, question=request.question, answer=answer)
-        return AskResponse(answer=answer, sources=sources, session_id=session_id, trace_id=trace_id)
+        return AskResponse(answer=answer, sources=all_sources, session_id=session_id, trace_id=trace_id)
 
 
 def _source_from_result(result: RetrievalResult) -> SourceSnippet:
@@ -83,7 +100,18 @@ def _source_from_result(result: RetrievalResult) -> SourceSnippet:
     )
 
 
-def _format_context(results: list[RetrievalResult]) -> str:
+def _source_from_result_web(result: WebSearchResult) -> SourceSnippet:
+    snippet = textwrap.shorten(result.content, width=180, placeholder="...")
+    return SourceSnippet(
+        title=result.title,
+        url=result.url,
+        snippet=snippet,
+        score=result.score,
+        source_type="web",
+    )
+
+
+def _format_context(results: list[RetrievalResult], web_results: list[WebSearchResult] | None = None) -> str:
     blocks = []
     for index, result in enumerate(results, start=1):
         chunk = result.chunk
@@ -97,5 +125,17 @@ def _format_context(results: list[RetrievalResult]) -> str:
                 ]
             )
         )
+    if web_results:
+        offset = len(results)
+        for index, wr in enumerate(web_results, start=offset + 1):
+            blocks.append(
+                "\n".join(
+                    [
+                        f"[{offset + index}] {wr.title}",
+                        f"URL: {wr.url}",
+                        f"内容: {wr.content}",
+                    ]
+                )
+            )
     return "\n\n".join(blocks)
 

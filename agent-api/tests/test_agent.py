@@ -6,6 +6,7 @@ from app.agent import ConversationStore, KnowledgeAgent, LLMError
 from app.knowledge import KnowledgeChunk
 from app.retrieval import KeywordRetriever
 from app.schemas import AskRequest
+from app.search import WebSearchResult
 
 
 class FakeLLM:
@@ -76,4 +77,86 @@ async def test_agent_returns_controlled_error_when_llm_fails() -> None:
     assert "暂时无法生成回答" in response.answer
     assert response.sources
     assert response.trace_id
+
+
+class FakeWebSearch:
+    def __init__(self, results: list[WebSearchResult] | None = None) -> None:
+        self.results = results or []
+        self.calls: list[str] = []
+
+    def search(self, question: str) -> list[WebSearchResult]:
+        self.calls.append(question)
+        return self.results
+
+
+WEB_FIXTURES = [
+    WebSearchResult(
+        title="Docker Compose 快速搭建 Hermes Agent",
+        url="https://example.com/hermes-docker",
+        content="Hermes Agent 支持通过 Docker Compose 一键部署，需要配置 .env 文件并运行 docker-compose up -d。",
+        score=0.92,
+    ),
+]
+
+
+@pytest.mark.asyncio
+async def test_agent_uses_web_search_when_local_score_low() -> None:
+    fake_web = FakeWebSearch(results=WEB_FIXTURES)
+    low_score_chunks = [
+        KnowledgeChunk(
+            chunk_id="misc:0",
+            title="一些笔记",
+            url="https://blog.estevancyber.net/notes/misc/",
+            content="一些日常笔记片段。",
+            summary="日常",
+        ),
+    ]
+    agent = KnowledgeAgent(
+        retriever=KeywordRetriever(low_score_chunks),
+        llm=FakeLLM(),
+        web_search=fake_web,
+        local_score_threshold=2.0,
+    )
+
+    response = await agent.answer(AskRequest(question="Hermes Agent 怎么部署 Docker？", session_id="s1"))
+
+    assert len(fake_web.calls) == 1
+    web_sources = [s for s in response.sources if s.source_type == "web"]
+    assert len(web_sources) >= 1
+    assert "Hermes Agent" in web_sources[0].title
+
+
+@pytest.mark.asyncio
+async def test_agent_skips_web_search_when_local_score_high() -> None:
+    fake_web = FakeWebSearch(results=WEB_FIXTURES)
+    agent = KnowledgeAgent(
+        retriever=KeywordRetriever(sample_chunks()),
+        llm=FakeLLM(),
+        web_search=fake_web,
+        local_score_threshold=2.0,
+    )
+
+    response = await agent.answer(AskRequest(question="VPS 上部署 Hermes-agent Docker", session_id="s1"))
+
+    assert len(fake_web.calls) == 0
+    assert all(s.source_type == "local" for s in response.sources)
+
+
+@pytest.mark.asyncio
+async def test_agent_handles_web_search_failure_gracefully() -> None:
+    class FailingWebSearch:
+        def search(self, question: str) -> list[WebSearchResult]:
+            return []
+
+    agent = KnowledgeAgent(
+        retriever=KeywordRetriever(sample_chunks()),
+        llm=FakeLLM(),
+        web_search=FailingWebSearch(),
+        local_score_threshold=5.0,
+    )
+
+    response = await agent.answer(AskRequest(question="Hermes Agent 怎么部署？", session_id="s1"))
+
+    assert response.answer
+    assert response.sources
 

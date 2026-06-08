@@ -51,3 +51,14 @@ def test_cors_allows_configured_origin() -> None:
 
     assert response.status_code == 200
     assert response.headers["access-control-allow-origin"] == "https://blog.estevancyber.net"
+
+
+def test_ask_endpoint_returns_source_type() -> None:
+    client = TestClient(create_app(testing=True))
+
+    response = client.post("/api/ask", json={"question": "Hermes Agent 怎么部署？", "session_id": "web"})
+
+    assert response.status_code == 200
+    payload = response.json()
+    for source in payload["sources"]:
+        assert "source_type" in source

@@ -8,6 +8,7 @@ from app.knowledge import chunk_documents, load_markdown_documents
 from app.llm import build_llm
 from app.retrieval import KeywordRetriever
 from app.schemas import AskRequest, AskResponse, HealthResponse, ReindexResponse
+from app.search import WebSearchClient
 from app.settings import Settings
 
 
@@ -62,6 +63,8 @@ def _wire_agent(app: FastAPI, *, settings: Settings, testing: bool) -> None:
         llm=build_llm(settings, testing=testing),
         conversations=conversations,
         retriever_limit=settings.retriever_limit,
+        web_search=WebSearchClient(api_key=settings.tavily_api_key),
+        local_score_threshold=settings.local_score_threshold,
     )
 
 
