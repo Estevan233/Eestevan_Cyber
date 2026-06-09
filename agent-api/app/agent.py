@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import asyncio
+import logging
 import textwrap
 import uuid
 from collections import defaultdict
@@ -8,6 +10,8 @@ from typing import Protocol
 from app.retrieval import KeywordRetriever, RetrievalResult
 from app.schemas import AskRequest, AskResponse, SourceSnippet
 from app.search import WebSearchClient, WebSearchResult
+
+logger = logging.getLogger(__name__)
 
 
 class LLMError(RuntimeError):
@@ -56,6 +60,7 @@ class KnowledgeAgent:
     async def answer(self, request: AskRequest) -> AskResponse:
         session_id = request.session_id or f"session-{uuid.uuid4().hex[:12]}"
         trace_id = uuid.uuid4().hex
+        logger.info("trace=%s session=%s question=%r", trace_id, session_id, request.question)
         results = self.retriever.search(request.question, limit=self.retriever_limit)
 
         max_score = max((r.score for r in results), default=0.0)
@@ -63,7 +68,11 @@ class KnowledgeAgent:
 
         web_results: list[WebSearchResult] = []
         if needs_web:
-            web_results = self.web_search.search(request.question)
+            logger.info("trace=%s local_score=%.2f below threshold, triggering web search", trace_id, max_score)
+            loop = asyncio.get_running_loop()
+            web_results = await loop.run_in_executor(None, self.web_search.search, request.question)
+        else:
+            logger.info("trace=%s local_score=%.2f sufficient, skipping web search", trace_id, max_score)
 
         local_sources = [_source_from_result(r) for r in results]
         web_snippets = [_source_from_result_web(wr) for wr in web_results]
@@ -87,6 +96,12 @@ class KnowledgeAgent:
 
         answer = answer.strip() or "模型没有返回有效内容。你可以换个问题再试。"
         self.conversations.add_turn(session_id, question=request.question, answer=answer)
+        logger.info(
+            "trace=%s answered sources=%d web_sources=%d",
+            trace_id,
+            len(local_sources),
+            len(web_snippets),
+        )
         return AskResponse(answer=answer, sources=all_sources, session_id=session_id, trace_id=trace_id)
 
 
@@ -131,7 +146,7 @@ def _format_context(results: list[RetrievalResult], web_results: list[WebSearchR
             blocks.append(
                 "\n".join(
                     [
-                        f"[{offset + index}] {wr.title}",
+                        f"[{index}] {wr.title}",
                         f"URL: {wr.url}",
                         f"内容: {wr.content}",
                     ]
