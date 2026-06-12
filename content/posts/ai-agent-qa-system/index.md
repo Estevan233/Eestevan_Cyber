@@ -5,7 +5,7 @@ draft: false
 tags: ["AI Agent", "FastAPI", "LangChain", "RAG", "DeepSeek", "Tavily", "Docker", "Cloudflare"]
 summary: "记录一个接入个人 Hugo 博客的知识库问答系统：读取 Markdown 内容，进行本地检索，调用 DeepSeek 生成回答，并在资料不足时通过 Tavily 联网搜索补充信息。"
 cover:
-  image: "architecture-overview.png"
+  image: "architecture-overview-v3.png"
   alt: "Knowledge Agent architecture"
   caption: "Hugo Markdown, FastAPI, local retrieval, LLM answering, and Tavily fallback"
 ---
@@ -30,7 +30,7 @@ FastAPI API
 Nginx + Cloudflare
 ```
 
-![Knowledge Agent architecture](architecture-overview.png)
+![Knowledge Agent architecture](architecture-overview-v3.png)
 
 ---
 
@@ -178,7 +178,7 @@ ASK_AGENT_LOCAL_SCORE_THRESHOLD 越高，越容易触发联网搜索。
 
 整体请求流程如下：
 
-![Request flow](request-flow.png)
+![Request flow](request-flow-v3.png)
 
 简单拆开看：
 
@@ -233,7 +233,7 @@ trace_id
 
 最终 VPS 上的部署结构是：
 
-![Deployment topology](deployment-topology.png)
+![Deployment topology](deployment-topology-v3.png)
 
 我把 API 与主站分开：
 
@@ -284,7 +284,7 @@ docker run -d --name estevan-knowledge-agent \
 
 这一步非常重要。API 子域名和主站不能混在一个 server block 里。
 
-![Domain routing rules](domain-routing.png)
+![Domain routing rules](domain-routing-v3.png)
 
 正确结构是：
 
